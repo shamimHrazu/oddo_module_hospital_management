@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="doctor_form_view" model="ir.ui.view">
+        <field name="name">hospital.doctor.form</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="designation"/>
+                        </group>
+                        <group>
+                            <field name="specializaion"/>
+                            <field name="age"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="doctors_action" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">tree,kanban,form</field>
+
+    </record>
+    <menuitem id="hospital_doctor_root"
+              name="Doctors"
+              parent="hospital_root"
+              sequence="10"/>
+    <menuitem id="hospital_doctors"
+              name="Doctors Record"
+              parent="hospital_doctor_root"
+              action="doctors_action"
+              sequence="10"/>
+</odoo>
