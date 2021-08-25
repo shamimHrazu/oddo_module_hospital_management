@@ -60,6 +60,8 @@
                 <group expand="1" string="Group By">
                     <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
                     <filter string="Age" name="group_by_age" context="{'group_by': 'age'}"/>
+                    <filter string="Patient under doctor" name="group_by_doctor" context="{'group_by': 'appointed_doctor_id'}"/>
+
 
                 </group>
             </search>
@@ -70,6 +72,7 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="reference"/>
                 <field name="age"/>
                 <field name="appointed_doctor_id"/>
                 <field name="name"/>
@@ -85,7 +88,7 @@
             <form>
                 <headed>
                     <button id="button_confirm" name="action_button_confirm" string="Confirm" class="btn-primary"
-                            states="done,cancel,draft" type="object"/>
+                            confirm="Are You Sure ? " states="done,cancel,draft" type="object"/>
 
                     <button id="button_done" name="action_button_done" string="Mark as Done" class="btn-primary"
                             states="cancel,draft,confirm" type="object"/>
@@ -98,15 +101,19 @@
                     statusbar_visible="draft,confirm,done,cancel"/>
                 </headed>
                 <sheet>
-
+                    <div class="oe_title">
+                            <h1>
+                                <field name="reference"/>
+                            </h1>
+                        </div>
                     <group>
                         <group>
-                            <field name="name"/>
+                            <field name="name" />
                             <field name="age"/>
                             <field name="appointed_doctor_id"/>
                         </group>
                         <group>
-                            <field name="gender"/>
+                            <field name="gender" invisible = "context.get('hide_gender')"/>
                             <field name="note"/>
                         </group>
 
@@ -125,9 +132,10 @@
         <field name="name">Patient</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.patient</field>
+        <field name="context">{'search_default_group_by_doctor':1, 'search_default_filter_by_male':1, }</field>
         <field name="view_mode">tree,kanban,form</field>
-
     </record>
+
     <menuitem id="hospital_root"
               name="Hospital"
               sequence="10"/>

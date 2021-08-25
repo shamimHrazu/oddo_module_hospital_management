@@ -9,9 +9,13 @@
     'depends': ['sale'],
     'data': [
         'security/ir.model.access.csv',
+        'data/data.xml',
         'views/patient.xml',
         'views/sales.xml',
         'views/doctor.xml',
+        'views/kids_view.xml',
+        'views/patient_gender_view.xml',
+        'views/appoinment_view.xml'
 
     ],
     'qweb': [],

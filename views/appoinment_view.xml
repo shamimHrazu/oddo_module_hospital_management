@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="tree_patient_appointment" model="ir.ui.view">
+        <field name="name">appointment.tree</field>
+        <field name="model">hospital.patient.appointment</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="date_appointment"/>
+                <field name="note"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="form_patient_appointment" model="ir.ui.view">
+        <field name="name">appointment.form</field>
+        <field name="model">hospital.patient.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <headed>
+                    <button id="button_confirm" name="action_button_confirm" string="Confirm" class="btn-primary"
+                            confirm="Are You Sure ? " states="done,cancel,draft" type="object"/>
+
+                    <button id="button_done" name="action_button_done" string="Mark as Done" class="btn-primary"
+                            states="cancel,draft,confirm" type="object"/>
+                    <button id="button_draft" name="action_button_draft" string="Save as Draft" class="btn-primary"
+                            states="cancel,confirm,done" type="object"/>
+                    <button id="button_cancel" name="action_button_cancel" string="cancel"
+                            states="draft,confirm,done" type="object"/>
+
+                    <field name="state" widget="statusbar"
+                    statusbar_visible="draft,confirm,done,cancel"/>
+                </headed>
+                <sheet>
+                    <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="date_appointment"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                            <field name="doctor_id"/>
+                        </group>
+
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_patients_appointment" model="ir.actions.act_window">
+        <field name="name">Patient's Appointment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient.appointment</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <menuitem id="patient_appointment_root"
+              name="Patient Appointment "
+              parent="hospital_root"
+              sequence="10"/>
+
+    <menuitem id="patient_appointment"
+              name="Patient's Appointment"
+              parent="patient_appointment_root"
+              action="action_patients_appointment"
+              sequence="10"/>
+</odoo>

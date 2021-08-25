@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class HospitalPatient(models.Model):
@@ -14,13 +14,14 @@ class HospitalPatient(models.Model):
         ('other', 'Other'),
     ], string='Gender',  required=True, copy=False, default= 'male', tracking= True)
     note = fields.Text(string="Description", tracking= True)
+    reference = fields.Char(string='Reference', required=True, copy=False, readonly=True, default=lambda self: _('New'))
 
     state = fields.Selection([('draft', 'Draft'),
                               ('confirm', 'Confirmed'),
                               ('done', 'Done'),
                               ('cancel', 'Canceled')],
                              string="status" ,default="draft", tracking= True)
-    appointed_doctor_id = fields.Many2one('hospital.doctor', string="Consultant")
+    appointed_doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
 
     def action_button_confirm(self):
         print("Confirm Button Clicked")
@@ -32,3 +33,11 @@ class HospitalPatient(models.Model):
         self.state= 'draft'
     def action_button_cancel(self):
         self.state="cancel"
+    @api.model
+    def create(self, vals_list):
+        if not vals_list.get('note'):
+            vals_list['note'] = 'new patient'
+        if vals_list.get('reference', _('New')) == _('New'):
+            vals_list['reference'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _('New')
+        res = super(HospitalPatient, self).create(vals_list)
+        return res
