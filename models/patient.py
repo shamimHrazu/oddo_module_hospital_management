@@ -43,5 +43,7 @@ class HospitalPatient(models.Model):
         return res
 
     def _compute_appointment_count(self):
-        ac = self.env['hospital.patient.appointment'].search_count([('patient_id' , '=' , self.id)])
-        self.appointment_count = ac
+        for rec in self:
+            ac = self.env['hospital.patient.appointment'].search_count([('patient_id' , '=' , rec.id)])
+            rec.appointment_count = ac
+

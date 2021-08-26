@@ -74,6 +74,7 @@
             <tree>
                 <field name="reference"/>
                 <field name="age"/>
+                <field name="appointment_count"/>
                 <field name="appointed_doctor_id"/>
                 <field name="name"/>
                 <field name="gender"/>
