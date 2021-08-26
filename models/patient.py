@@ -15,7 +15,7 @@ class HospitalPatient(models.Model):
     ], string='Gender',  required=True, copy=False, default= 'male', tracking= True)
     note = fields.Text(string="Description", tracking= True)
     reference = fields.Char(string='Reference', required=True, copy=False, readonly=True, default=lambda self: _('New'))
-
+    appointment_count = fields.Integer(string="appointment count", compute = "_compute_appointment_count")
     state = fields.Selection([('draft', 'Draft'),
                               ('confirm', 'Confirmed'),
                               ('done', 'Done'),
@@ -41,3 +41,7 @@ class HospitalPatient(models.Model):
             vals_list['reference'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _('New')
         res = super(HospitalPatient, self).create(vals_list)
         return res
+
+    def _compute_appointment_count(self):
+        ac = self.env['hospital.patient.appointment'].search_count([('patient_id' , '=' , self.id)])
+        self.appointment_count = ac
