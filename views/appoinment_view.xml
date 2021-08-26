@@ -42,6 +42,7 @@
                         <group>
                             <field name="patient_id"/>
                             <field name="date_appointment"/>
+                            <field name="gender"/>
                         </group>
                         <group>
                             <field name="note"/>

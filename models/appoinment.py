@@ -17,6 +17,11 @@ class PatientAppoinment(models.Model):
     date_appointment = fields.Date(string="Appointment Date")
     doctor_id = fields.Many2one(string="Consultant", related = 'patient_id.appointed_doctor_id', tracking = True)
     checkup_time = fields.Datetime(string="Check Up Time")
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other'),
+    ], string='Gender', required=True, copy=False, default='male', tracking=True)
 
     def action_button_confirm(self):
         print("Confirm Button Clicked")
@@ -40,6 +45,15 @@ class PatientAppoinment(models.Model):
             vals_list['name'] = self.env['ir.sequence'].next_by_code('hospital.patient.appointment') or _('New')
         res = super(PatientAppoinment, self).create(vals_list)
         return res
+
+    @api.onchange('patient_id')
+    def _onchange_patient_id(self):
+        if self.patient_id:
+            if self.gender:
+                self.gender = self.patient_id.gender
+        else:
+            self.gender = ''
+
 
 
 
