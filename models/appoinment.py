@@ -49,10 +49,12 @@ class PatientAppoinment(models.Model):
     @api.onchange('patient_id')
     def _onchange_patient_id(self):
         if self.patient_id:
-            if self.gender:
-                self.gender = self.patient_id.gender
+            self.gender = self.patient_id.gender
+
+        if self.note:
+            self.note = self.patient_id.note
         else:
-            self.gender = ''
+            self.note = 'New Patient'
 
 
 
