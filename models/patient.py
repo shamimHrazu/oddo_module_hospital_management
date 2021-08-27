@@ -51,3 +51,13 @@ class HospitalPatient(models.Model):
             ac = self.env['hospital.patient.appointment'].search_count([('patient_id' , '=' , rec.id)])
             rec.appointment_count = ac
 
+    @api.model
+    def default_get(self, fields_list):
+        res = super(HospitalPatient,self).default_get(fields_list)
+        print(fields_list)
+        print(res)
+        res['gender'] = 'female'
+        res['age'] = 18
+        if not res.get('note'):
+            res['note'] = "type a description"
+        return res
