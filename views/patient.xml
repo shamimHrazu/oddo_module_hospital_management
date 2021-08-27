@@ -97,6 +97,8 @@
                             states="cancel,confirm,done" type="object"/>
                     <button id="button_cancel" name="action_button_cancel" string="cancel"
                             states="draft,confirm,done" type="object"/>
+                    <button id="button_create_appointment" name="%(om_hospital.appointment_creation_action)d" string="Create appointment"
+                            type="action"/>
 
                     <field name="state" widget="statusbar"
                     statusbar_visible="draft,confirm,done,cancel"/>
