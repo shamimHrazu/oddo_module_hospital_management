@@ -6,11 +6,11 @@
         <field name="arch" type="xml">
             <form string="Create Appointment">
                 <group class="oe_title">
-                    <field name="name"/>
                     <field name="patient_id"/>
+                    <field name="appointment_date"/>
                 </group>
                 <footer>
-                    <button name="action_button_confirm" string="Confirm" class="btn-primary"
+                    <button name="action_appointment_confirm" string="Confirm" class="btn-primary"
                             type="object"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>

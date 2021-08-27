@@ -78,7 +78,7 @@
               sequence="10"/>
     <menuitem id="create_appointment"
               name="Create Appointment"
-              parent="patient_appointment"
+              parent="patient_appointment_root"
               action="appointment_creation_action"
               sequence="10"/>
 </odoo>
