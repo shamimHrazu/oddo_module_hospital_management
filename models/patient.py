@@ -26,15 +26,19 @@ class HospitalPatient(models.Model):
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'
+
     def action_button_done(self):
         print("Done button clicked")
         self.state='done'
+
     def action_button_draft(self):
         self.state= 'draft'
+
     def action_button_cancel(self):
         self.state="cancel"
+
     @api.model
-    def create(self, vals_list):
+    def create(self,vals_list):
         if not vals_list.get('note'):
             vals_list['note'] = 'new patient'
         if vals_list.get('reference', _('New')) == _('New'):
