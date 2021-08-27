@@ -12,6 +12,8 @@
                 <footer>
                     <button name="action_appointment_confirm" string="Confirm" class="btn-primary"
                             type="object"/>
+                    <button name="action_view_all_appointments" string="Appointments" class="btn-primary"
+                            type="object"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
