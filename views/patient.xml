@@ -61,8 +61,6 @@
                     <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
                     <filter string="Age" name="group_by_age" context="{'group_by': 'age'}"/>
                     <filter string="Patient under doctor" name="group_by_doctor" context="{'group_by': 'appointed_doctor_id'}"/>
-
-
                 </group>
             </search>
         </field>
@@ -127,6 +125,14 @@
                         </group>
 
                     </group>
+                    <notebook>
+                        <page string="Appointments" name="appointments">
+                            <field string ="appointments" name="appointments">
+
+                            </field>
+
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>

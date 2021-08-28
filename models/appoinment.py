@@ -27,6 +27,7 @@ class PatientAppoinment(models.Model):
         ('cpd', 'CPD test'),
         ('bilirubin', 'BIlirubin'),
     ])
+    medicine_list_ids = fields.One2many('prescription.medicine','appointment_id', string="prescription line")
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'
@@ -61,5 +62,13 @@ class PatientAppoinment(models.Model):
             self.note = 'New Patient'
 
 
+class Medicine(models.Model):
+    _name = "prescription.medicine"
+    _description = "medicine list"
 
+    name = fields.Char(string="Medicine name")
+    qty = fields.Integer()
+    times = fields.Integer()
+    note = fields.Text()
+    appointment_id = fields.Many2one('hospital.patient.appointment', string="appointment id")
 

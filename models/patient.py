@@ -23,6 +23,7 @@ class HospitalPatient(models.Model):
                              string="status" ,default="draft", tracking= True)
     appointed_doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
     image = fields.Binary(string="Patient image")
+    appointments = fields.One2many('hospital.patient.appointment','patient_id', 'appointments')
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'

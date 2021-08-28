@@ -95,10 +95,30 @@
                                 <field name="prescription"/>
                             </group>
                         </page>
+
                         <page string="tests" name="lab_tests">
                             <group>
-                                <field name="lab_test"/>
                             </group>
+                        </page>
+
+                        <page string="medicine list" name="medicine_list">
+
+                            <field name="medicine_list_ids">
+                                <tree editable="top">
+                                    <field name="name"></field>
+                                    <field name="qty"></field>
+                                    <field name="times"></field>
+                                    <field name="note"></field>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"></field>
+                                        <field name="qty"></field>
+                                        <field name="times"></field>
+                                        <field name="note"></field>
+                                    </group>
+                                </form>
+                            </field>
                         </page>
                         <page string="others" name="others">
                             <field name="note"/>
