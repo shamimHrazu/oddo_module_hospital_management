@@ -22,7 +22,11 @@ class PatientAppoinment(models.Model):
         ('female', 'Female'),
         ('other', 'Other'),
     ], string='Gender', required=True, copy=False, default='male', tracking=True)
-
+    prescription = fields.Text(string="doctor's prescription")
+    lab_test = fields.Selection([
+        ('cpd', 'CPD test'),
+        ('bilirubin', 'BIlirubin'),
+    ])
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'

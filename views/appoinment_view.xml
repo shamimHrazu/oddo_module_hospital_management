@@ -89,12 +89,28 @@
                         </group>
 
                     </group>
+                    <notebook>
+                        <page string="doctor's prescription" name="doctors_prescription">
+                            <group>
+                                <field name="prescription"/>
+                            </group>
+                        </page>
+                        <page string="tests" name="lab_tests">
+                            <group>
+                                <field name="lab_test"/>
+                            </group>
+                        </page>
+                        <page string="others" name="others">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="activity_ids"/>
                     <field name="message_ids"/>
                 </div>
+
             </form>
         </field>
     </record>
