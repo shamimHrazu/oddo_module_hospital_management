@@ -40,7 +40,7 @@
         <field name="name">appointment.tree</field>
         <field name="model">hospital.patient.appointment</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree multi_edit="1">
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="date_appointment"/>
