@@ -1,4 +1,5 @@
 from odoo import fields, api,models, _
+from odoo.exceptions import ValidationError
 
 
 class PatientAppoinment(models.Model):
@@ -60,6 +61,11 @@ class PatientAppoinment(models.Model):
             self.note = self.patient_id.note
         else:
             self.note = 'New Patient'
+
+    def unlink(self):
+        if self.state == 'done':
+            raise ValidationError(_('you can not delete %s as it is in done state')%self.name)
+        return super(PatientAppoinment, self).unlink()
 
 
 class Medicine(models.Model):
