@@ -4,7 +4,6 @@ class HospitalDoctor(models.Model):
     _name = "hospital.doctor"
     _description = "doctors record"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-
     name = fields.Char(string="Name of the Doctor", required= True)
     designation  = fields.Selection([
         ('intern', 'Intern'),

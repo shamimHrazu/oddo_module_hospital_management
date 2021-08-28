@@ -5,7 +5,7 @@ class PatientAppoinment(models.Model):
     _name = "hospital.patient.appointment"
     _description = "Patient Appointment Schedule"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-
+    _order = "id desc"
     name = fields.Char(string='appointment_id', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     patient_id = fields.Many2one('hospital.patient' , string= "patient id", tracking = True)
     state = fields.Selection([('draft', 'Draft'),
@@ -15,7 +15,7 @@ class PatientAppoinment(models.Model):
                              string="status", default="draft", tracking=True)
     note = fields.Text(string="Description",tracking=True)
     date_appointment = fields.Date(string="Appointment Date")
-    doctor_id = fields.Many2one(string="Consultant", related = 'patient_id.appointed_doctor_id', tracking = True)
+    doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
     checkup_time = fields.Datetime(string="Check Up Time")
     gender = fields.Selection([
         ('male', 'Male'),
