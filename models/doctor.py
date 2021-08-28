@@ -1,4 +1,4 @@
-from odoo import models, api, fields
+from odoo import models, api, fields, _
 
 class HospitalDoctor(models.Model):
     _name = "hospital.doctor"
@@ -9,11 +9,18 @@ class HospitalDoctor(models.Model):
         ('intern', 'Intern'),
         ('assistantprofessor', 'Assistant Professor'),
         ('professor', 'Professor'),
-    ], string='Designation',  required=True, copy=False, default= 'intern', tracking= True)
+    ], string='Designation', copy=False, tracking= True )
     age = fields.Integer()
     specializaion = fields.Selection([
         ('medicine', 'Medicine'),
         ('surgery', 'Surgery'),
         ('nurology', 'Neurology'),
-    ], string='specialist at ',  required=True, copy=False, default= 'medicine', tracking= True)
+    ], string='specialist at ', copy=False, default= 'medicine',  tracking= True)
 
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        if not default.get('name'):
+            default.update(name=_('%s (copy)') % (self.name))
+        default['age'] = 0
+        return super(HospitalDoctor, self).copy(default)
