@@ -8,8 +8,10 @@
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="date_appointment"/>
-                <field name="note"/>
+                <field name="note" optional="show"/>
                 <field name="doctor_id"/>
+                <field name="checkup_time" optional="show"/>
+                <field name="gender" optional="show"/>
             </tree>
         </field>
     </record>

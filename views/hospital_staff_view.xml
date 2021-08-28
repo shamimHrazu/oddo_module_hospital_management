@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id='staff_view_kanban' model='ir.ui.view'>
+        <field name="name">hospital.staff.kanban</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <kanban sample = "1">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="salary"/>
+                <field name="gender"/>
+                <field name="dept"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Name :
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        Age :
+                                        <field name="age"/>
+                                    </li>
+                                    <li>
+                                        Gender :
+                                        <field name="gender"/>
+                                    </li>
+                                    <li>
+                                        Note :
+                                        <field name="join_date"/>
+                                        Salary:
+                                        <field name="salary"/>
+                                        Department:
+                                        <field name="dept"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="staff_search_view" model="ir.ui.view">
+        <field name="name">patient.search.view</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <search string="search patient by nae or description">
+                <field name="name"/>
+                <separator/>
+                <filter string="Male" name="filter_by_male"
+                        domain="[ ('gender', '=', 'male')]"
+                        help="male staff only"/>
+                <filter string="Female" name="filter_by_female"
+                        domain="[ ('gender', '=', 'female')]"
+                        help="female staff only"/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                    <filter string="Age" name="group_by_age" context="{'group_by': 'age'}"/>
+                    <filter string="Department wise filter" name="group_by_dept"
+                            context="{'group_by': 'dept'}"/>
+
+
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="staff_tree_view" model="ir.ui.view">
+        <field name="name">hospital.staff.tree</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <tree sample = "1">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="dept"/>
+                <field name="gender" />
+                <field name="join_date" />
+                <field name="salary"/>
+                <field name="join_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="staff_form_view" model="ir.ui.view">
+        <field name="name">hospital.staff.form</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="dept"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="salary"/>
+                            <field name="join_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_hospital_staff" model="ir.actions.act_window">
+        <field name="name">Staff</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.staff</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <menuitem id="hospital_staff_root"
+              name="Staff Affairs"
+              parent="hospital_root"
+              sequence="10"/>
+
+    <menuitem id="hospital_staff"
+              name="Staff List"
+              parent="hospital_staff_root"
+              action="action_hospital_staff"
+              sequence="10"/>
+</odoo>

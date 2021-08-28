@@ -13,6 +13,7 @@
         'wizard/create_appointment_view.xml',
         'wizard/search_appointment.xml',
         'views/patient.xml',
+        'views/hospital_staff_view.xml',
         'views/sales.xml',
         'views/doctor.xml',
         'views/kids_view.xml',
