@@ -22,7 +22,7 @@ class HospitalPatient(models.Model):
                               ('cancel', 'Canceled')],
                              string="status" ,default="draft", tracking= True)
     appointed_doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
-
+    image = fields.Binary(string="Patient image")
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'
