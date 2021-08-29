@@ -14,6 +14,7 @@ class PatientAppoinment(models.Model):
                               ('done', 'Done'),
                               ('cancel', 'Canceled')],
                              string="status", default="draft", tracking=True)
+    name = fields.Char(string='Reference', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     note = fields.Text(string="Description",tracking=True)
     date_appointment = fields.Date(string="Appointment Date")
     doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
@@ -47,7 +48,7 @@ class PatientAppoinment(models.Model):
     def create(self, vals_list):
         if not vals_list.get('note'):
             vals_list['note'] = 'new patient'
-        if vals_list.get('reference', _('New')) == _('New'):
+        if vals_list.get('name', _('New')) == _('New'):
             vals_list['name'] = self.env['ir.sequence'].next_by_code('hospital.patient.appointment') or _('New')
         res = super(PatientAppoinment, self).create(vals_list)
         return res
@@ -67,12 +68,6 @@ class PatientAppoinment(models.Model):
             raise ValidationError(_('you can not delete %s as it is in done state')%self.name)
         return super(PatientAppoinment, self).unlink()
 
-    def name_get(self):
-        result = []
-        for rec in self:
-            name = rec.reference + "  " + rec.name
-            result.append(rec.id , name)
-        return result
 
 class Medicine(models.Model):
     _name = "prescription.medicine"

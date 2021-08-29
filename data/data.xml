@@ -11,7 +11,7 @@
         </record>
 
         <record id="seq_patient_appointment" model="ir.sequence">
-            <field name="name"> Patient's Appoinement</field>
+            <field name="name"> Patient's Appointement</field>
             <field name="code">hospital.patient.appointment</field>
             <field name="prefix">HP-AP</field>
             <field name="padding">8</field>

@@ -18,7 +18,9 @@
         'views/doctor.xml',
         'views/kids_view.xml',
         'views/patient_gender_view.xml',
-        'views/appoinment_view.xml'
+        'views/appoinment_view.xml',
+        'report/report_patient_card_view.xml',
+        'report/patient_card_template.xml',
 
     ],
     'qweb': [],

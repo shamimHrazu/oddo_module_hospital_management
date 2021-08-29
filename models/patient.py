@@ -24,6 +24,13 @@ class HospitalPatient(models.Model):
     appointed_doctor_id = fields.Many2one('hospital.doctor', string="Consultant", tracking = True)
     image = fields.Binary(string="Patient image")
     appointments = fields.One2many('hospital.patient.appointment','patient_id', 'appointments')
+    appointment_count = fields.Integer(string='Appointment Count')
+
+    def _compute_appointment_count(self):
+        for rec in self:
+            appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
+            rec.appointment_count = appointment_count
+
     def action_button_confirm(self):
         print("Confirm Button Clicked")
         self.state='confirm'
