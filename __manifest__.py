@@ -6,7 +6,7 @@
     'sequence': -100,
     'description': """Hospital management software for xyz hospital""",
     'category': 'Productivity',
-    'depends': ['sale'],
+    'depends': ['sale' , 'report_xlsx'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
