@@ -1,5 +1,5 @@
 from odoo import api, fields, models, _
-
+from odoo.exceptions import  ValidationError
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"
@@ -62,3 +62,16 @@ class HospitalPatient(models.Model):
         if not res.get('note'):
             res['note'] = "type a description"
         return res
+
+    @api.constrains('name')
+    def check_name(self):
+        for rec in self:
+            patient = self.env['hospital.patient'].search([('name' , '=' , rec.name) , ('id' , '!=',rec.id )])
+            if patient:
+                raise ValidationError(_('name %s already exist . please Pick another name') % self.name)
+
+    @api.constrains('age')
+    def check_age(self):
+        if self.age == 0:
+            raise ValidationError(_('Age can not be Zero'))
+
