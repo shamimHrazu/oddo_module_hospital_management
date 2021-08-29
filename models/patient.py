@@ -75,3 +75,5 @@ class HospitalPatient(models.Model):
         if self.age == 0:
             raise ValidationError(_('Age can not be Zero'))
 
+
+

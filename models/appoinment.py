@@ -67,6 +67,12 @@ class PatientAppoinment(models.Model):
             raise ValidationError(_('you can not delete %s as it is in done state')%self.name)
         return super(PatientAppoinment, self).unlink()
 
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = rec.reference + "  " + rec.name
+            result.append(rec.id , name)
+        return result
 
 class Medicine(models.Model):
     _name = "prescription.medicine"
